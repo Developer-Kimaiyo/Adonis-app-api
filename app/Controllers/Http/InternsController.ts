@@ -65,17 +65,17 @@ export default class InternsController {
   public async store({ request, auth }: HttpContextContract) {
     await auth.use("api").authenticate();
     const data = request.only(["name", "email", "stack"]);
-    // const internsSchema = schema.create({
-    //   name: schema.string(),
-    //   email: schema.string({}, [rules.email()]),
-    //   stack: schema.string(),
-    // });
+    const internsSchema = schema.create({
+      name: schema.string(),
+      email: schema.string({}, [rules.email()]),
+      stack: schema.string(),
+    });
 
   const stack1 = data.stack[0];
   const stack2 = data.stack[1];
   const stack3 = data.stack[3];
 
-    // await request.validate({ schema: internsSchema });
+    await request.validate({ schema: internsSchema });
     const stacks1 = new Intern();
     stack1.name = stack1;
     const stacks2 = new Intern();
