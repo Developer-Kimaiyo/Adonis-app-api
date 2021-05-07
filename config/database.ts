@@ -5,10 +5,10 @@
  * file.
  */
 
-import Env from '@ioc:Adonis/Core/Env'
-import { DatabaseConfig } from '@ioc:Adonis/Lucid/Database'
-import URL from "url-parse";
-const PROD_MYSQL_DB = new URL(Env.get("CLEARDB_DATABASE_URL"));
+import Env from "@ioc:Adonis/Core/Env";
+import { DatabaseConfig } from "@ioc:Adonis/Lucid/Database";
+import Url from "url-parse";
+const CLEARDB_DATABASE_URL = new Url(Env.get("CLEARDB_DATABASE_URL"));
 
 const databaseConfig: DatabaseConfig = {
   /*
@@ -38,19 +38,15 @@ const databaseConfig: DatabaseConfig = {
     mysql: {
       client: "mysql",
       connection: {
-        host: Env.get("MYSQL_HOST", PROD_MYSQL_DB.host),
-        port: Env.get("MYSQL_PORT"),
-        user: Env.get("MYSQL_USER", PROD_MYSQL_DB.username),
-        password: Env.get("MYSQL_PASSWORD", PROD_MYSQL_DB.password),
-        database: Env.get("MYSQL_DB_NAME", PROD_MYSQL_DB.pathname.substr(1)),
-      },
-      migrations: {
-        naturalSort: true,
+        host: CLEARDB_DATABASE_URL.host as string,
+        port: Number(""),
+        user: CLEARDB_DATABASE_URL.username as string,
+        password: CLEARDB_DATABASE_URL.password as string,
+        database: CLEARDB_DATABASE_URL.pathname.substr(1) as string,
       },
       healthCheck: false,
-      debug: false,
     },
   },
 };
 
-export default databaseConfig
+export default databaseConfig;

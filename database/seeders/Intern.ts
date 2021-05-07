@@ -3,7 +3,7 @@ import { InternFactory } from 'Database/factories';
 
 export default class InternSeeder extends BaseSeeder {
   public async run () {
-   await InternFactory.with("stacks", 3).makeMany(10);  
+   await InternFactory.with("stacks", 3).makeMany(1000);  
     
  
   }
